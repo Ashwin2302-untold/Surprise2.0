@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise ✨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+.page{
+display:none;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:30px;
+text-align:center;
+}
+
+.active{
+display:flex;
+animation:fade .8s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card{
+width:100%;
+max-width:750px;
+padding:40px;
+border-radius:25px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+box-shadow:0 8px 40px rgba(0,0,0,0.3);
+}
+
+h1{
+font-family:'Playfair Display',serif;
+margin-bottom:20px;
+font-size:2.2rem;
+}
+
+p{
+line-height:1.9;
+font-size:1.05rem;
+}
+
+button{
+margin-top:25px;
+padding:14px 28px;
+border:none;
+border-radius:50px;
+font-size:1rem;
+font-weight:600;
+cursor:pointer;
+background:#f9a8d4;
+color:#111;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-3px) scale(1.04);
+}
+
+video{
+width:100%;
+border-radius:20px;
+margin-top:20px;
+}
+
+.star-container{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:20px;
+margin-top:30px;
+}
+
+.star{
+font-size:2.5rem;
+cursor:pointer;
+transition:.3s;
+}
+
+.star:hover{
+transform:scale(1.2);
+}
+
+#wishMessage{
+margin-top:20px;
+font-size:1.1rem;
+color:#f9a8d4;
+min-height:40px;
+}
+
+.final-text{
+font-size:1.1rem;
+line-height:2;
+}
+
+.floating{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:.4;
+animation:float 8s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+}
+100%{
+transform:translateY(-100vh);
+}
+}
+
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Stars -->
+
+<div class="floating" style="left:10%;animation-delay:0s;"></div>
+<div class="floating" style="left:25%;animation-delay:2s;"></div>
+<div class="floating" style="left:40%;animation-delay:4s;"></div>
+<div class="floating" style="left:60%;animation-delay:1s;"></div>
+<div class="floating" style="left:80%;animation-delay:3s;"></div>
+
+<!-- HOME -->
+
+<section class="page active" id="home">
+
+<div class="card">
+
+<h1>🎁 Hey Birthday Girl</h1>
+
+<p>
+Aaj ka din already special hai,
+lekin maine socha ki ismein thoda sa aur magic add kiya jaaye ✨
+<br><br>
+Ready for a little surprise?
+</p>
+
+<button onclick="startExperience()">
+✨ Get Started
+</button>
+
+</div>
+
+</section>
+
+<!-- NOTE -->
+
+<section class="page" id="note">
+
+<div class="card">
+
+<h1>💌 A Little Note</h1>
+
+<p>
+Aaj tumhara birthday hai, aur shayad main ye sab ek simple
+"Happy Birthday" message bhej kar bhi khatam kar sakta tha.
+<br><br>
+Lekin mujhe laga ki kuch cheezein sirf words mein nahi kahi ja sakti.
+<br><br>
+Isliye maine tumhare liye kuch chhota sa surprise prepare kiya hai.
+<br><br>
+Main bas chahta hoon ki aaj ke din tum thodi der ke liye smile karo 😊
+</p>
+
+<button onclick="showPage('videoPage')">
+🎬 Open Surprise
+</button>
+
+</div>
+
+</section>
+
+<!-- VIDEO -->
+
+<section class="page" id="videoPage">
+
+<div class="card">
+
+<h1>❤️ One More Thing</h1>
+
+<p>
+Some things are better said than written...
+</p>
+
+<video id="birthdayVideo" controls>
+<source src="birthday-video.mp4" type="video/mp4">
+</video>
+
+<button onclick="showPage('stars')">
+⭐ Continue
+</button>
+
+</div>
+
+</section>
+
+<!-- STARS -->
+
+<section class="page" id="stars">
+
+<div class="card">
+
+<h1>✨ Hidden Wishes</h1>
+
+<p>
+Before you go...
+There are a few wishes hidden in the stars 🌙
+</p>
+
+<div class="star-container">
+
+<div class="star" onclick="wish('I hope you keep smiling 😊')">⭐</div>
+
+<div class="star" onclick="wish('You deserve all the happiness 🌷')">⭐</div>
+
+<div class="star" onclick="wish('May this year bring beautiful memories ✨')">⭐</div>
+
+<div class="star" onclick="wish('Thank you for being you ❤️')">⭐</div>
+
+</div>
+
+<div id="wishMessage"></div>
+
+<button onclick="showPage('final')">
+💖 Final Surprise
+</button>
+
+</div>
+
+</section>
+
+<!-- FINAL -->
+
+<section class="page" id="final">
+
+<div class="card">
+
+<h1>🎂 Happy Birthday</h1>
+
+<p class="final-text">
+
+Out of all the birthdays you'll celebrate...
+<br><br>
+
+I don't know if you'll remember every gift,
+every wish,
+or every message.
+<br><br>
+
+But I hope you'll remember that someone spent time,
+effort and heart trying to make this day a little more special for you.
+❤️
+<br><br>
+
+✨ Happy Birthday ✨
+
+</p>
+
+<button onclick="showPage('home')">
+🏠 Start Again
+</button>
+
+</div>
+
+</section>
+
+<script>
+
+const music = document.getElementById("bgMusic");
+
+function startExperience(){
+
+music.volume = 0.2;
+
+music.play().catch(()=>{});
+
+showPage("note");
+}
+
+function showPage(id){
+
+document.querySelectorAll(".page")
+.forEach(page=>page.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+window.scrollTo(0,0);
+}
+
+function wish(text){
+
+document.getElementById("wishMessage").innerText = text;
+
+}
+
+const video = document.getElementById("birthdayVideo");
+
+video.addEventListener("play",()=>{
+
+music.pause();
+
+});
+
+video.addEventListener("ended",()=>{
+
+music.play();
+
+});
+
+</script>
+
+</body>
+</html>
